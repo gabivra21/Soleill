@@ -8,7 +8,7 @@ public abstract class Cliente {
 
     private float saldo;
 
-    public Cliente(String nome, String email, int celular, String senha, float saldo) {
+    public Cliente(String nome, String email, int celular, String senha) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
