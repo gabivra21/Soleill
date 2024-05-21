@@ -26,6 +26,7 @@ public class Main {
 
         ArrayList<Produto> vestuario = new ArrayList<>();
         ArrayList<Produto> calcados = new ArrayList<>();
+        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com",999997654, "solraiar", 23.9f);
 
         vestuario.add(calca);
         vestuario.add(camisa);
@@ -48,6 +49,13 @@ public class Main {
         calcados.add(vans);
         calcados.add(veja);
         calcados.add(salto);
+
+        //System.out.println(calcados);
+        cliente.visualizarProduto(calca);
+        Carrinho carrinho1 = new Carrinho();
+
+        cliente.setNome("Lucia");
+
 
 
     }

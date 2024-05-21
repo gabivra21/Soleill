@@ -32,6 +32,8 @@ public class Produto {
     public void setEstoque(int estoque) {
         this.estoque = estoque;
     }
+
+
 }
 
 

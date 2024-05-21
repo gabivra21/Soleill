@@ -8,7 +8,7 @@ public abstract class Cliente {
 
     private float saldo;
 
-    public Cliente(String nome, String email, int celular, String senha) {
+    public Cliente(String nome, String email, int celular, String senha,float saldo ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
@@ -48,7 +48,7 @@ public abstract class Cliente {
         this.senha = senha;
     }
 
-    public abstract double comprar();
+    public abstract double comprar(Carrinho carrinho);
 
     public ArrayList criarPedido(){
         ArrayList<Produto> pedido = new ArrayList<>();
@@ -64,8 +64,10 @@ public abstract class Cliente {
 
     }
 
-    public void vizualizarProduto(){
-
+    public void visualizarProduto(Produto produto){
+        System.out.println("O produto " + produto.getNome() );
+        System.out.println("Tem o valor de " + produto.getValor());
+        System.out.println("Nós possuimos " + produto.getEstoque() + " em estoque");
     }
 
     public void cancelarAssinatura(){

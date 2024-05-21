@@ -3,28 +3,28 @@ import java.util.ArrayList;
 public class Carrinho {
     private ArrayList<Produto> itens;
     private int qtdItens;
-    private Endereco endEntrega;
+    private String endEntrega;
     private Cliente cliente;
     private double valorTotal;
 
-    public Carrinho() {
-        this.itens = new ArrayList<Produto>();
+    public Carrinho(ArrayList<Produto> itens, int qtdItens, String endEntrega,Cliente cliente, double valorTotal) {
+        this.itens = itens;
         this.qtdItens = 0;
-        this.endEntrega = new Endereco();
-        this.cliente = new Cliente();
-        this.valorTotal = 0.0;
+        this.endEntrega = endEntrega;
+        this.cliente = cliente;
+        this.valorTotal = 0;
     }
 
     public void addItem(Produto produto) {
         this.itens.add(produto);
         this.qtdItens++;
-        this.valorTotal += produto.getPreco();
+        this.valorTotal += produto.getValor();
     }
 
     public void removerItem(Produto produto) {
         this.itens.remove(produto);
         this.qtdItens--;
-        this.valorTotal -= produto.getPreco();
+        this.valorTotal -= produto.getValor();
     }
 
     public ArrayList<Produto> getItens() {
@@ -43,11 +43,11 @@ public class Carrinho {
         this.qtdItens = qtdItens;
     }
 
-    public Endereco getEndEntrega() {
+    public String getEndEntrega() {
         return endEntrega;
     }
 
-    public void setEndEntrega(Endereco endEntrega) {
+    public void setEndEntrega(String  endEntrega) {
         this.endEntrega = endEntrega;
     }
 
