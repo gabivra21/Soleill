@@ -10,6 +10,6 @@ public class Lista {
         this.isPublic = isPublic;
     }
 
-    private ArrayList itens<Produto>;
+
 
 }
