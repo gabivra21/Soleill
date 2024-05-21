@@ -1,9 +1,9 @@
 public class Pagamento {
     private String metodo;
-    private date data;
+    private int data;
     private String status;
 
-    public Pagamento (String metodo, date data, String status) {
+    public Pagamento (String metodo, int data, String status) {
         this.metodo = metodo;
         this.data = data;
         this.status = status;
@@ -25,11 +25,11 @@ public class Pagamento {
         this.metodo = metodo;
     }
 
-    public date getData() {
+    public int getData() {
         return data;
     }
 
-    public void setData(date data) {
+    public void setData(int data) {
         this.data = data;
     }
 
