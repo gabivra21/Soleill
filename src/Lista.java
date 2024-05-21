@@ -1,6 +1,6 @@
 
 public class Lista {
-    private String nome:
+    private String nome;
     private String dataCriacao;
     private boolean isPublic;
 
@@ -10,6 +10,6 @@ public class Lista {
         this.isPublic = isPublic;
     }
 
-    private ArrayList itens<Produto>;
+
 
 }
