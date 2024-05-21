@@ -6,11 +6,14 @@ public abstract class Cliente {
     private int celular;
     private String senha;
 
-    public Cliente(String nome, String email, int celular, String senha) {
+    private float saldo;
+
+    public Cliente(String nome, String email, int celular, String senha, float saldo) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
         this.senha = senha;
+        this.saldo = saldo;
     }
 
     public String getNome() {
