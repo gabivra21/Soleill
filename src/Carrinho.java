@@ -7,13 +7,14 @@ public class Carrinho {
     private Cliente cliente;
     private double valorTotal;
 
-    public Carrinho(ArrayList<Produto> itens, int qtdItens, String endEntrega,Cliente cliente, double valorTotal) {
-        this.itens = itens;
+    public Carrinho(ArrayList<Produto> itens,int qtdItens, String endEntrega, Cliente cliente,double valorTotal ) {
+        this.itens = new ArrayList<>();
         this.qtdItens = 0;
         this.endEntrega = endEntrega;
         this.cliente = cliente;
-        this.valorTotal = 0;
+        this.valorTotal = 0.0;
     }
+
 
     public void addItem(Produto produto) {
         this.itens.add(produto);
@@ -21,11 +22,13 @@ public class Carrinho {
         this.valorTotal += produto.getValor();
     }
 
+
     public void removerItem(Produto produto) {
         this.itens.remove(produto);
         this.qtdItens--;
         this.valorTotal -= produto.getValor();
     }
+
 
     public ArrayList<Produto> getItens() {
         return itens;
@@ -47,7 +50,7 @@ public class Carrinho {
         return endEntrega;
     }
 
-    public void setEndEntrega(String  endEntrega) {
+    public void setEndEntrega(String endEntrega) {
         this.endEntrega = endEntrega;
     }
 

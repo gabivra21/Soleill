@@ -52,7 +52,7 @@ public class Main {
 
         //System.out.println(calcados);
         cliente.visualizarProduto(calca);
-        Carrinho carrinho1 = new Carrinho();
+        
 
         cliente.setNome("Lucia");
 

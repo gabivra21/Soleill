@@ -5,15 +5,23 @@ public abstract class Cliente {
     private String email;
     private int celular;
     private String senha;
-
     private float saldo;
+    private Carrinho carrinho;
 
-    public Cliente(String nome, String email, int celular, String senha,float saldo ) {
+    public Cliente(String nome, String email, int celular, String senha,float saldo,Carrinho carrinho ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
         this.senha = senha;
         this.saldo = saldo;
+        this.carrinho = null;
+    }
+
+    public void adicionarProdutoAoCarrinho(Produto produto) {
+        if (this.carrinho == null) {
+            this.carrinho = new Carrinho(0, 0,"",this,0.0);
+        }
+        this.carrinho.addItem(produto);
     }
 
     public String getNome() {
@@ -48,6 +56,22 @@ public abstract class Cliente {
         this.senha = senha;
     }
 
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
+    }
+
     public abstract double comprar(Carrinho carrinho);
 
     public ArrayList criarPedido(){
@@ -77,4 +101,8 @@ public abstract class Cliente {
     public void configurarAssinatura(){
 
     }
+
+
+
+
 }
