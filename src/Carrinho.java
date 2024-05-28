@@ -3,16 +3,15 @@ import java.util.ArrayList;
 public class Carrinho {
     private ArrayList<Produto> itens;
     private int qtdItens;
-    private String endEntrega;
+
     private Cliente cliente;
     private double valorTotal;
 
-    public Carrinho(ArrayList<Produto> itens,int qtdItens, String endEntrega, Cliente cliente,double valorTotal ) {
-        this.itens = new ArrayList<>();
-        this.qtdItens = 0;
-        this.endEntrega = endEntrega;
+    public Carrinho(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
+        this.itens = itens != null ? itens : new ArrayList<>();
+        this.qtdItens = qtdItens;
         this.cliente = cliente;
-        this.valorTotal = 0.0;
+        this.valorTotal = valorTotal;
     }
 
 

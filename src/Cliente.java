@@ -19,7 +19,7 @@ public abstract class Cliente {
 
     public void adicionarProdutoAoCarrinho(Produto produto) {
         if (this.carrinho == null) {
-            this.carrinho = new Carrinho(0, 0,"",this,0.0);
+            this.carrinho = new Carrinho(new ArrayList<>(), 0,  this, 0.0);
         }
         this.carrinho.addItem(produto);
     }
