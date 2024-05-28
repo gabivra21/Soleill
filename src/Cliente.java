@@ -6,7 +6,7 @@ public abstract class Cliente {
     private int celular;
     private String senha;
     private float saldo;
-    private Carrinho carrinho;
+    protected Carrinho carrinho;
 
     public Cliente(String nome, String email, int celular, String senha,float saldo,Carrinho carrinho ) {
         this.nome = nome;
@@ -14,15 +14,13 @@ public abstract class Cliente {
         this.celular = celular;
         this.senha = senha;
         this.saldo = saldo;
-        this.carrinho = null;
+        this.carrinho = carrinho;
+
     }
 
-    public void adicionarProdutoAoCarrinho(Produto produto) {
-        if (this.carrinho == null) {
-            this.carrinho = new Carrinho(new ArrayList<>(), 0,  this, 0.0);
-        }
-        this.carrinho.addItem(produto);
-    }
+
+
+
 
     public String getNome() {
         return nome;

@@ -26,7 +26,8 @@ public class Main {
 
         ArrayList<Produto> vestuario = new ArrayList<>();
         ArrayList<Produto> calcados = new ArrayList<>();
-        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com",999997654, "solraiar", 23.9f);
+
+        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com",999997654, "solraiar", 23.9f, new Carrinho(new ArrayList<Produto>(), 0, null, 0.0));
 
         vestuario.add(calca);
         vestuario.add(camisa);
@@ -55,6 +56,8 @@ public class Main {
         
 
         cliente.setNome("Lucia");
+        cliente.carrinho.addItem(bota);
+        cliente.comprar(cliente.carrinho);
 
 
 

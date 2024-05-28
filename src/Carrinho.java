@@ -45,14 +45,6 @@ public class Carrinho {
         this.qtdItens = qtdItens;
     }
 
-    public String getEndEntrega() {
-        return endEntrega;
-    }
-
-    public void setEndEntrega(String endEntrega) {
-        this.endEntrega = endEntrega;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }

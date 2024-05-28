@@ -1,6 +1,6 @@
 public class ClientePremium extends Cliente {
-    public ClientePremium(String nome, String email, int celular, String senha, float saldo) {
-        super(nome, email, celular, senha, saldo);
+    public ClientePremium(String nome, String email, int celular, String senha, float saldo, Carrinho carrinho) {
+        super(nome, email, celular, senha, saldo, carrinho);
     }
 
     @Override
