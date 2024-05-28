@@ -24,10 +24,12 @@ public class Main {
         Produto veja = new Calcado(799.f, "Veja Campo", 18);
         Produto salto= new Calcado(199.f, "Salto preto", 21);
 
-        ArrayList<Produto> vestuario = new ArrayList<>();
+
         ArrayList<Produto> calcados = new ArrayList<>();
 
         Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com",999997654, "solraiar", 23.9f, new Carrinho(new ArrayList<Produto>(), 0, null, 0.0));
+
+        ArrayList<Produto> vestuario = new ArrayList<>();
 
         vestuario.add(calca);
         vestuario.add(camisa);
@@ -42,6 +44,7 @@ public class Main {
         vestuario.add(camiseta);
         vestuario.add(camiseta1);
         vestuario.add(camiseta2);
+
 
         calcados.add(bota);
         calcados.add(allStar);

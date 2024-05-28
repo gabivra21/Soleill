@@ -12,6 +12,7 @@ public class ClienteComum extends Cliente {
 
         }
         double totalCompra = this.carrinho.getValorTotal();
+        System.out.println();
         System.out.println(totalCompra);
         return totalCompra;
 
