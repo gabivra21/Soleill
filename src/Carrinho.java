@@ -28,7 +28,13 @@ public class Carrinho {
         this.valorTotal -= produto.getValor();
     }
 
-
+    public double calcularValorTotal() {
+        double total = 0.0;
+        for (Produto produto : itens) {
+            total += produto.getValor();
+        }
+        return total;
+    }
     public ArrayList<Produto> getItens() {
         return itens;
     }
