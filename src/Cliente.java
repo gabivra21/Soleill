@@ -7,14 +7,20 @@ public abstract class Cliente {
     private String senha;
     private float saldo;
     protected Carrinho carrinho;
+    private String endereco;
+    private boolean assinaturaAtiva;
+    private String validadeAssinatura;
 
-    public Cliente(String nome, String email, int celular, String senha,float saldo,Carrinho carrinho ) {
+    public Cliente(String nome, String email, int celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
         this.senha = senha;
         this.saldo = saldo;
         this.carrinho = carrinho;
+        this.endereco = endereco;
+        this.assinaturaAtiva = false;
+        this.validadeAssinatura = null;
 
     }
     public void criarPedido(String endEntrega, int prazoEntrega) {
@@ -76,6 +82,31 @@ public abstract class Cliente {
         this.carrinho = carrinho;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+
+    public boolean isAssinaturaAtiva() {
+        return assinaturaAtiva;
+    }
+
+    public void setAssinaturaAtiva(boolean assinaturaAtiva) {
+        this.assinaturaAtiva = assinaturaAtiva;
+    }
+
+    public String getValidadeAssinatura() {
+        return validadeAssinatura;
+    }
+
+    public void setValidadeAssinatura(String validadeAssinatura) {
+        this.validadeAssinatura = validadeAssinatura;
+    }
+
     public abstract double comprar(Carrinho carrinho);
 
 
@@ -85,8 +116,8 @@ public abstract class Cliente {
         return lista;
     }
 
-    public void cadastrarEndereco(){
-
+    public void cadastrarEndereco( String endereco){
+        this.setEndereco(endereco);
     }
 
     public void visualizarProduto(Produto produto){
@@ -96,12 +127,15 @@ public abstract class Cliente {
     }
 
     public void cancelarAssinatura(){
-
+        if (assinaturaAtiva) {
+            assinaturaAtiva = false;
+            validadeAssinatura = null;
+            System.out.println("Assinatura cancelada com sucesso.");
+        } else {
+            System.out.println("Nenhuma assinatura ativa para cancelar.");
+        }
     }
 
-    public void configurarAssinatura(){
-
-    }
 
 
 
