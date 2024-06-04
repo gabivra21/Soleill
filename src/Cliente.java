@@ -17,9 +17,15 @@ public abstract class Cliente {
         this.carrinho = carrinho;
 
     }
+    public void criarPedido(String endEntrega, int prazoEntrega) {
+        int qtdeItens = carrinho.getItens().size();
+        ArrayList<Produto> produtos = carrinho.getItens();
+        double valorTotal = carrinho.calcularValorTotal();
+        boolean entregue = false;
 
-
-
+        Pedido pedido = new Pedido(this.nome, qtdeItens, produtos, valorTotal, prazoEntrega, entregue, endEntrega);
+        Pedido.escreverPedidoNoArquivo(pedido);
+    }
 
 
     public String getNome() {
@@ -72,10 +78,7 @@ public abstract class Cliente {
 
     public abstract double comprar(Carrinho carrinho);
 
-    public ArrayList criarPedido(){
-        ArrayList<Produto> pedido = new ArrayList<>();
-        return pedido;
-    }
+
 
     public ArrayList<Produto> criarLista(){
         ArrayList<Produto> lista = new ArrayList<>();

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class Produto {
     private float valor;
     private String nome;
@@ -13,7 +14,7 @@ public class Produto {
 
 
 
-    public void listarVestuario(ArrayList vestuario) {
+    public void listarVestuario(ArrayList<Produto> vestuario) {
         if (vestuario.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
         } else {
