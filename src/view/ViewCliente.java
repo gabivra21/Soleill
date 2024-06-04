@@ -1,4 +1,4 @@
-package view;
+/*package view;
 
 import java.awt.EventQueue;
 
@@ -29,7 +29,7 @@ import model.ModelClientes;
 import model.ModelProdutos;
 import java.awt.Font;
 
-/* public class ViewCliente extends JFrame {
+ public class ViewCliente extends JFrame {
 
     private JPanel contentPane;
     private JTextField jtfCodigo;
