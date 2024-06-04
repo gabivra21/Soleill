@@ -77,6 +77,9 @@ public class Main {
         System.out.println("******* BEM VINDO A SOLEILL *******\n A melhor loja de vestuários e calçados que encontrará");
         System.out.println("");
 
+        cliente2.criarPedido("rua iaia", 12);
+        cliente.criarPedido("rua ioooo",14);
+
 
 
 
