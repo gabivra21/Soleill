@@ -44,4 +44,60 @@ public class Pedido {
       System.out.println("Ocorreu um erro ao salvar o pedido: " + e.getMessage());
     }
   }
+
+  public String getNomeCliente() {
+    return nomeCliente;
+  }
+
+  public void setNomeCliente(String nomeCliente) {
+    this.nomeCliente = nomeCliente;
+  }
+
+  public int getQtdeItens() {
+    return qtdeItens;
+  }
+
+  public void setQtdeItens(int qtdeItens) {
+    this.qtdeItens = qtdeItens;
+  }
+
+  public ArrayList<Produto> getProdutos() {
+    return produtos;
+  }
+
+  public void setProdutos(ArrayList<Produto> produtos) {
+    this.produtos = produtos;
+  }
+
+  public double getValorTotal() {
+    return valorTotal;
+  }
+
+  public void setValorTotal(double valorTotal) {
+    this.valorTotal = valorTotal;
+  }
+
+  public int getPrazoEntrega() {
+    return prazoEntrega;
+  }
+
+  public void setPrazoEntrega(int prazoEntrega) {
+    this.prazoEntrega = prazoEntrega;
+  }
+
+  public boolean isEntregue() {
+    return entregue;
+  }
+
+  public void setEntregue(boolean entregue) {
+    this.entregue = entregue;
+  }
+
+  public String getEndEntrega() {
+    return endEntrega;
+  }
+
+  public void setEndEntrega(String endEntrega) {
+    this.endEntrega = endEntrega;
+  }
 }

@@ -79,6 +79,7 @@ public class Main {
 
         cliente2.criarPedido("rua iaia", 12);
         cliente.criarPedido("rua ioooo",14);
+        cliente.criarPedido("rua lala",13);
 
 
 
