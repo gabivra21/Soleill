@@ -33,6 +33,17 @@ public abstract class Cliente {
         Pedido.escreverPedidoNoArquivo(pedido);
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + nome + "\n" +
+                "Email: " + email + "\n" +
+                "Celular: " + celular + "\n" +
+                "Saldo: " + saldo + "\n" +
+                "Endereço: " + endereco + "\n" +
+                "Assinatura Ativa: " + (assinaturaAtiva ? "Sim" : "Não") + "\n" +
+                "Validade da Assinatura: " + validadeAssinatura + "\n";
+    }
+
 
     public String getNome() {
         return nome;
