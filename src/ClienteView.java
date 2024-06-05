@@ -84,7 +84,7 @@ public class ClienteView extends JFrame {
     private void saveCliente() {
         cliente.setNome(nomeField.getText());
         cliente.setEmail(emailField.getText());
-        cliente.setCelular(Integer.parseInt(celularField.getText()));
+        cliente.setCelular(celularField.getText());
         cliente.setSenha(senhaField.getText());
         cliente.setSaldo(Float.parseFloat(saldoField.getText()));
         cliente.setEndereco(enderecoField.getText());
@@ -103,7 +103,7 @@ public class ClienteView extends JFrame {
 
     public static void main(String[] args) {
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0,null, 0.0);
-        Cliente cliente = new Cliente("Nome", "email@example.com", 123456789, "senha", 100.0f, carrinho, "Endereço", false, null) {
+        Cliente cliente = new Cliente("Nome", "email@example.com", "(41)123456789", "senha", 100.0f, carrinho, "Endereço", false, null) {
             @Override
             public double comprar(Carrinho carrinho) {
                 return 0;

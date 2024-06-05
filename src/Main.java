@@ -27,7 +27,7 @@ public class Main {
 
         ArrayList<Produto> calcados = new ArrayList<>();
 
-        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com",999997654, "solraiar", 23.9f, new Carrinho(new ArrayList<Produto>(), 0,null, 0.0),"RuaLilas 899",false,"12/11/2024");
+        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com","999997654", "solraiar", 23.9f, new Carrinho(new ArrayList<Produto>(), 0,null, 0.0),"RuaLilas 899",false,"12/11/2024");
         cliente.carrinho.setCliente(cliente);
 
         ArrayList<Produto> vestuario = new ArrayList<>();
@@ -63,7 +63,7 @@ public class Main {
         cliente.carrinho.addItem(bota);
         cliente.comprar(cliente.carrinho);
 
-        Cliente cliente2 = new ClientePremium("Lara", "lara@gmail.com",998766609,"aloha",0,new Carrinho(new ArrayList<Produto>(),0,null,0.0), "Rua Tipo 123", true,"21/10/2024");
+        Cliente cliente2 = new ClientePremium("Lara", "lara@gmail.com","998766609","aloha",0,new Carrinho(new ArrayList<Produto>(),0,null,0.0), "Rua Tipo 123", true,"21/10/2024");
         cliente.carrinho.setCliente(cliente2);
 
         cliente2.cadastrarEndereco("Rua iaia");

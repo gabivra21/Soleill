@@ -18,7 +18,7 @@ public class GerenciadorCliente {
         String email = scanner.nextLine();
 
         System.out.print("Celular: ");
-        int celular = Integer.parseInt(scanner.nextLine());
+        String celular = scanner.nextLine();
 
         System.out.print("Senha: ");
         String senha = scanner.nextLine();

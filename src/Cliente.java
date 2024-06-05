@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public abstract class Cliente {
     private String nome;
     private String email;
-    private int celular;
+    private String celular;
     private String senha;
     private float saldo;
     protected Carrinho carrinho;
@@ -11,7 +11,7 @@ public abstract class Cliente {
     private boolean assinaturaAtiva;
     private String validadeAssinatura;
 
-    public Cliente(String nome, String email, int celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
+    public Cliente(String nome, String email, String celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
@@ -61,11 +61,11 @@ public abstract class Cliente {
         this.email = email;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
