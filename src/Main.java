@@ -82,7 +82,7 @@ public class Main {
         cliente.criarPedido("rua lala",13);
 
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
-        //gerenciadorCliente.cadastrarCliente();
+        gerenciadorCliente.cadastrarCliente();
         gerenciadorCliente.listarClientes();
 
 

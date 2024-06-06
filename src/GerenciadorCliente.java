@@ -23,15 +23,15 @@ public class GerenciadorCliente {
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
 
-        System.out.print("Saldo: ");
-        float saldo = Float.parseFloat(scanner.nextLine());
+
+
 
         System.out.print("Endereço: ");
         String endereco = scanner.nextLine();
 
         boolean assinaturaAtivada = false;
         String validadeAssinatura = null;
-
+        float saldo = 0.0f;
 
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(),0,null,0.0); // Inicializar o carrinho vazio
 
@@ -41,10 +41,20 @@ public class GerenciadorCliente {
         System.out.println("Cliente cadastrado com sucesso!!");
     }
 
+    public Cliente loginCliente(String email, String senha) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getEmail().equals(email) && cliente.getSenha().equals(senha)) {
+                return cliente;
+            }
+        }
+        return null; // Retorna null se o cliente não for encontrado
+    }
+
     public void listarClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
         } else {
+            System.out.println("***********Listagem de nossos Clientes**********");
             for (Cliente cliente : listaClientes) {
                 System.out.println(cliente);
                 System.out.println("---------------");
