@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class GerenciadorCliente {
     private ArrayList<Cliente> listaClientes;
@@ -59,6 +60,24 @@ public class GerenciadorCliente {
                 System.out.println(cliente);
                 System.out.println("---------------");
             }
+        }
+    }
+
+    public void salvarClientes() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("clientes.dat"))) {
+            outputStream.writeObject(listaClientes);
+            System.out.println("Clientes salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar clientes: " + e.getMessage());
+        }
+    }
+
+    public void carregarClientes() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
+            listaClientes = (ArrayList<Cliente>) inputStream.readObject();
+            System.out.println("Clientes carregados com sucesso!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erro ao carregar clientes: " + e.getMessage());
         }
     }
 }
