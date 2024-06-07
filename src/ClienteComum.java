@@ -3,6 +3,7 @@ import java.io.Serializable;
 
 
 public class ClienteComum extends Cliente implements Serializable {
+
     public ClienteComum(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }

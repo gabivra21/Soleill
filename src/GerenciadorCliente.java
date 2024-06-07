@@ -6,7 +6,8 @@ public class GerenciadorCliente implements Serializable {
     private ArrayList<ClienteComum> listaClientes;
 
     public GerenciadorCliente() {
-        listaClientes = new ArrayList<>();
+        this.listaClientes = listaClientes;
+        carregarClientes(); // Carregar clientes ao iniciar o gerenciador
     }
 
     public void adicionarCliente(ClienteComum cliente) {
@@ -32,9 +33,6 @@ public class GerenciadorCliente implements Serializable {
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
 
-
-
-
         System.out.print("Endereço: ");
         String endereco = scanner.nextLine();
 
@@ -42,10 +40,12 @@ public class GerenciadorCliente implements Serializable {
         String validadeAssinatura = null;
         float saldo = 0.0f;
 
-        Carrinho carrinho = new Carrinho(new ArrayList<Produto>(),0,null,0.0); // Inicializar o carrinho vazio
+        Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0); // Inicializar o carrinho vazio
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
         listaClientes.add(novoCliente);
+
+        salvarClientes(); // Salvar clientes após adicionar novo cliente
 
         System.out.println("Cliente cadastrado com sucesso!!");
     }
@@ -87,10 +87,14 @@ public class GerenciadorCliente implements Serializable {
         }
     }
 
-
-
     public void carregarClientes() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
+        File file = new File("clientes.dat");
+        if (!file.exists()) {
+            System.out.println("Nenhum cliente cadastrado previamente.");
+            return;
+        }
+
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
             listaClientes = (ArrayList<ClienteComum>) inputStream.readObject();
             System.out.println("Clientes carregados com sucesso!");
         } catch (IOException | ClassNotFoundException e) {

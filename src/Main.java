@@ -66,24 +66,30 @@ public class Main {
         Cliente cliente2 = new ClientePremium("Lara", "lara@gmail.com","998766609","aloha",0,new Carrinho(new ArrayList<Produto>(),0,null,0.0), "Rua Tipo 123", true,"21/10/2024");
         cliente.carrinho.setCliente(cliente2);
 
-        cliente2.cadastrarEndereco("Rua iaia");
+        /*cliente2.cadastrarEndereco("Rua iaia");
         System.out.println("***********************************");
         cliente2.comprar(cliente2.carrinho);
         cliente2.carrinho.addItem(regata);
         cliente2.comprar(cliente2.carrinho);
         System.out.println("***********************************");
-        cliente.comprar(cliente.carrinho);
+        cliente.comprar(cliente.carrinho);*/
 
-        System.out.println("******* BEM VINDO A SOLEILL *******\n A melhor loja de vestuários e calçados que encontrará");
+        System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
 
-        cliente2.criarPedido("rua iaia", 12);
+        /*cliente2.criarPedido("rua iaia", 12);
         cliente.criarPedido("rua ioooo",14);
-        cliente.criarPedido("rua lala",13);
+        cliente.criarPedido("rua lala",13);*/
 
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
+        // Carregar clientes ao iniciar o gerenciador
+        //gerenciadorCliente.carregarClientes();
+
+        // Cadastrar novo cliente
         gerenciadorCliente.cadastrarCliente();
-        gerenciadorCliente.listarClientes();
+
+        // Listar clientes
+        //gerenciadorCliente.listarClientes();
 
 
 

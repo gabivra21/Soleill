@@ -1,16 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.ArrayList;
 
 public class LoginPage {
     private JFrame frame;
     private ArrayList<Cliente> listaClientes;
-    private static final String CLIENTES_FILE = "clientes.dat";
 
-    public LoginPage() {
-        listaClientes = carregarClientes();
+    public LoginPage(ArrayList<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
         createUI();
     }
 
@@ -99,23 +97,17 @@ public class LoginPage {
         return null;
     }
 
-    private ArrayList<Cliente> carregarClientes() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(CLIENTES_FILE))) {
-            return (ArrayList<Cliente>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            return new ArrayList<>();
-        }
-    }
-
     public static void main(String[] args) {
-        new LoginPage();
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+
+        // Mostrar a página de login
+        new LoginPage(listaClientes);
     }
 }
 
 class CadastroPage {
     private JFrame frame;
     private ArrayList<Cliente> listaClientes;
-    private static final String CLIENTES_FILE = "clientes.dat";
 
     public CadastroPage(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
@@ -205,21 +197,13 @@ class CadastroPage {
 
                 Cliente novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
                 listaClientes.add(novoCliente);
-                salvarClientes(listaClientes);
 
                 JOptionPane.showMessageDialog(panel, "Cadastro realizado com sucesso!");
                 frame.dispose(); // Fecha a página de cadastro
-                new LoginPage(); // Redireciona de volta para a página de login
+                new LoginPage(listaClientes); // Redireciona de volta para a página de login
             }
         });
     }
-
-    private void salvarClientes(ArrayList<Cliente> listaClientes) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(CLIENTES_FILE))) {
-            oos.writeObject(listaClientes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
+
 
