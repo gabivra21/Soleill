@@ -1,12 +1,20 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.*;
 
-public class GerenciadorCliente {
-    private ArrayList<Cliente> listaClientes;
+public class GerenciadorCliente implements Serializable {
+    private ArrayList<ClienteComum> listaClientes;
 
     public GerenciadorCliente() {
-        this.listaClientes = new ArrayList<>();
+        listaClientes = new ArrayList<>();
+    }
+
+    public void adicionarCliente(ClienteComum cliente) {
+        listaClientes.add(cliente);
+    }
+
+    public ArrayList<ClienteComum> getListaClientes() {
+        return listaClientes;
     }
 
     public void cadastrarCliente() {
@@ -36,30 +44,37 @@ public class GerenciadorCliente {
 
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(),0,null,0.0); // Inicializar o carrinho vazio
 
-        Cliente novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
+        ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
         listaClientes.add(novoCliente);
 
         System.out.println("Cliente cadastrado com sucesso!!");
-    }
-
-    public Cliente loginCliente(String email, String senha) {
-        for (Cliente cliente : listaClientes) {
-            if (cliente.getEmail().equals(email) && cliente.getSenha().equals(senha)) {
-                return cliente;
-            }
-        }
-        return null; // Retorna null se o cliente não for encontrado
     }
 
     public void listarClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
         } else {
-            System.out.println("***********Listagem de nossos Clientes**********");
             for (Cliente cliente : listaClientes) {
                 System.out.println(cliente);
                 System.out.println("---------------");
             }
+        }
+    }
+
+    public String resumoString(Cliente cliente) {
+        return "Nome do Cliente: " + cliente.getNome() + "\n" +
+                "Email: " + cliente.getEmail() + "\n" +
+                "Senha: " + cliente.getSenha() + "\n" +
+                "Celular: " + cliente.getCelular() + "\n";
+    }
+
+    public void salvarCliente(Cliente cliente) {
+        try (FileWriter writer = new FileWriter("cliente.txt", true)) {
+            writer.write(resumoString(cliente));
+            writer.write("\n");
+            System.out.println("Cliente salvo com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao salvar o cliente: " + e.getMessage());
         }
     }
 
@@ -72,9 +87,11 @@ public class GerenciadorCliente {
         }
     }
 
+
+
     public void carregarClientes() {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
-            listaClientes = (ArrayList<Cliente>) inputStream.readObject();
+            listaClientes = (ArrayList<ClienteComum>) inputStream.readObject();
             System.out.println("Clientes carregados com sucesso!");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Erro ao carregar clientes: " + e.getMessage());
