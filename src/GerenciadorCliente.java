@@ -3,15 +3,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GerenciadorCliente implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<ClienteComum> listaClientes;
 
     public GerenciadorCliente() {
-        this.listaClientes = listaClientes;
+        listaClientes = new ArrayList<>();
         carregarClientes(); // Carregar clientes ao iniciar o gerenciador
     }
 
     public void adicionarCliente(ClienteComum cliente) {
         listaClientes.add(cliente);
+        salvarClientes(); // Salvar após adicionar um cliente
+    }
+
+    public int obterIndiceCliente(String email) {
+        for (int i = 0; i < listaClientes.size(); i++) {
+            if (listaClientes.get(i).getEmail().equals(email)) {
+                return i;
+            }
+        }
+        return -1; // Retorna -1 se o cliente não for encontrado
     }
 
     public ArrayList<ClienteComum> getListaClientes() {
@@ -43,9 +54,7 @@ public class GerenciadorCliente implements Serializable {
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0); // Inicializar o carrinho vazio
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
-        listaClientes.add(novoCliente);
-
-        salvarClientes(); // Salvar clientes após adicionar novo cliente
+        adicionarCliente(novoCliente); // Adicionar e salvar o cliente
 
         System.out.println("Cliente cadastrado com sucesso!!");
     }
@@ -58,23 +67,6 @@ public class GerenciadorCliente implements Serializable {
                 System.out.println(cliente);
                 System.out.println("---------------");
             }
-        }
-    }
-
-    public String resumoString(Cliente cliente) {
-        return "Nome do Cliente: " + cliente.getNome() + "\n" +
-                "Email: " + cliente.getEmail() + "\n" +
-                "Senha: " + cliente.getSenha() + "\n" +
-                "Celular: " + cliente.getCelular() + "\n";
-    }
-
-    public void salvarCliente(Cliente cliente) {
-        try (FileWriter writer = new FileWriter("cliente.txt", true)) {
-            writer.write(resumoString(cliente));
-            writer.write("\n");
-            System.out.println("Cliente salvo com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao salvar o cliente: " + e.getMessage());
         }
     }
 
@@ -100,5 +92,16 @@ public class GerenciadorCliente implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Erro ao carregar clientes: " + e.getMessage());
         }
+    }
+
+    public Cliente logar(String email, String senha) {
+        for (ClienteComum cliente : listaClientes) {
+            if (cliente.getEmail().equals(email) && cliente.getSenha().equals(senha)) {
+                System.out.println("Login bem-sucedido!");
+                return cliente;
+            }
+        }
+        System.out.println("Email ou senha incorretos.");
+        return null;
     }
 }

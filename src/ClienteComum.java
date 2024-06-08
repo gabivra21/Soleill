@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class ClienteComum extends Cliente implements Serializable {
 
+    public ClienteComum() {
+        // Construtor padrão necessário para a desserialização
+    }
+
     public ClienteComum(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
@@ -22,8 +26,15 @@ public class ClienteComum extends Cliente implements Serializable {
 
         }
 
+    /*public void ativarAssinatura(ClienteComum clienteComum){
+        String clienteProcurado = "";
+        int index = GerenciadorCliente.listaClientes.indexOf(clienteProcurado);
 
+        if (index != -1) {
+            System.out.println("O cliente " + clienteProcurado + " está no índice: " + index);
+        } else {
+            System.out.println("Cliente não encontrado na lista.");
+        }*/
 
-
-    }
+}
 

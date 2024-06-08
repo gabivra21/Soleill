@@ -86,10 +86,12 @@ public class Main {
         //gerenciadorCliente.carregarClientes();
 
         // Cadastrar novo cliente
-        gerenciadorCliente.cadastrarCliente();
+        //gerenciadorCliente.cadastrarCliente();
 
         // Listar clientes
-        //gerenciadorCliente.listarClientes();
+        gerenciadorCliente.listarClientes();
+
+
 
 
 

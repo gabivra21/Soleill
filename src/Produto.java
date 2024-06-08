@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Produto {
+public class Produto implements Serializable {
     private float valor;
     private String nome;
     private int estoque;

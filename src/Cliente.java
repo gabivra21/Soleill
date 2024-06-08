@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Cliente {
+public abstract class Cliente implements Serializable {
     private String nome;
     private String email;
     private String celular;
@@ -23,6 +24,10 @@ public abstract class Cliente {
         this.validadeAssinatura = null;
 
     }
+
+    protected Cliente() {
+    }
+
     public void criarPedido(String endEntrega, int prazoEntrega) {
         int qtdeItens = carrinho.getItens().size();
         ArrayList<Produto> produtos = carrinho.getItens();
