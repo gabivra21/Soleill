@@ -56,12 +56,12 @@ public class Main {
         calcados.add(salto);
 
         //System.out.println(calcados);
-        cliente.visualizarProduto(calca);
+        //cliente.visualizarProduto(calca);
         
 
         cliente.setNome("Lucia");
         cliente.carrinho.addItem(bota);
-        cliente.comprar(cliente.carrinho);
+        //cliente.comprar(cliente.carrinho);
 
         Cliente cliente2 = new ClientePremium("Lara", "lara@gmail.com","998766609","aloha",0,new Carrinho(new ArrayList<Produto>(),0,null,0.0), "Rua Tipo 123", true,"21/10/2024");
         cliente.carrinho.setCliente(cliente2);
@@ -76,12 +76,15 @@ public class Main {
 
         System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
+        Menu menu = new Menu();
+        GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
+        menu.printMenu(gerenciadorCliente);
 
         /*cliente2.criarPedido("rua iaia", 12);
         cliente.criarPedido("rua ioooo",14);
         cliente.criarPedido("rua lala",13);*/
 
-        GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
+
         // Carregar clientes ao iniciar o gerenciador
         //gerenciadorCliente.carregarClientes();
 
@@ -89,7 +92,8 @@ public class Main {
         //gerenciadorCliente.cadastrarCliente();
 
         // Listar clientes
-        gerenciadorCliente.listarClientes();
+        //gerenciadorCliente.listarClientes();
+        //gerenciadorCliente.logar("gabi@gmail.com","azul");
 
 
 
