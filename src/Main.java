@@ -97,8 +97,10 @@ public class Main {
         //gerenciadorCliente.listarClientes();
         //gerenciadorCliente.logar("gabi@gmail.com","azul");
 
-        //gerenciadorCliente.listarClientes();
+       // gerenciadorCliente.listarClientes();
         //gerenciadorCliente.getListaClientesComuns();
+
+
 
 
 

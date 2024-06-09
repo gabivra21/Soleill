@@ -28,6 +28,12 @@ public abstract class Cliente implements Serializable {
     protected Cliente() {
     }
 
+    public String toFileString() {
+        // Formatar os dados do cliente como uma linha de texto
+        return nome + "," + email + "," + celular + "," + senha + "," + saldo + "," + endereco + "," + assinaturaAtiva + "," + validadeAssinatura;
+    }
+
+
     public void criarPedido(String endEntrega, int prazoEntrega) {
         int qtdeItens = carrinho.getItens().size();
         ArrayList<Produto> produtos = carrinho.getItens();

@@ -15,6 +15,10 @@ public class Carrinho implements Serializable {
         this.valorTotal = valorTotal;
     }
 
+    public Carrinho() {
+
+    }
+
 
     public void addItem(Produto produto) {
         this.itens.add(produto);

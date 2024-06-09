@@ -12,6 +12,7 @@ public class ClienteComum extends Cliente implements Serializable {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
 
+
     @Override
     public  double comprar(Carrinho carrinho) {
         if (this.carrinho == null || this.carrinho.getItens().isEmpty()) {
