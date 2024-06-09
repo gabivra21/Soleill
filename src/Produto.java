@@ -14,20 +14,6 @@ public class Produto implements Serializable {
     }
 
 
-
-    public void listarVestuario(ArrayList<Produto> vestuario) {
-        if (vestuario.isEmpty()) {
-            System.out.println("Nenhum produto cadastrado.");
-        } else {
-            System.out.println("Produtos cadastrados:");
-            for (Produto produto: vestuario) {
-                System.out.println("Nome: " + produto.getNome() + ", Valor: " + produto.getValor() + ", Estoque: " + produto.getEstoque());
-            }
-        }
-    }
-
-
-
     public double getValor() {
         return valor;
     }

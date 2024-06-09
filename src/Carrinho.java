@@ -67,4 +67,22 @@ public class Carrinho implements Serializable {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public void exibirCarrinho(Cliente cliente) {
+        for(Produto produto :itens){
+            System.out.println("Produtos do carrinho:");
+            cliente.visualizarProduto(produto);
+            int qi = this.getQtdItens();
+            System.out.println("Contabilizando " + qi +" itens no total.");
+            this.calcularValorTotal();
+            double vt = this.getValorTotal();
+            System.out.println("Valor (sem o frete): "+vt);
+        }
+    }
+
+    /*public void addItem(String produtoA) {
+        this.itens.add(produtoA);
+        this.qtdItens++;
+        this.valorTotal += produtoA.getValor();
+    }*/
 }

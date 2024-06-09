@@ -72,13 +72,15 @@ public class Main {
         cliente2.carrinho.addItem(regata);
         cliente2.comprar(cliente2.carrinho);
         System.out.println("***********************************");
-        cliente.comprar(cliente.carrinho);*/
+        cliente.comprar(cliente.camainrinho);*/
 
         System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
         Menu menu = new Menu();
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
-        menu.printMenu(gerenciadorCliente);
+        GerenciadorProduto gerenciadorProduto = new GerenciadorProduto();
+        menu.printMenu(gerenciadorCliente, gerenciadorProduto, vestuario , calcados);
+
 
         /*cliente2.criarPedido("rua iaia", 12);
         cliente.criarPedido("rua ioooo",14);
@@ -94,6 +96,9 @@ public class Main {
         // Listar clientes
         //gerenciadorCliente.listarClientes();
         //gerenciadorCliente.logar("gabi@gmail.com","azul");
+
+        //gerenciadorCliente.listarClientes();
+        //gerenciadorCliente.getListaClientesComuns();
 
 
 

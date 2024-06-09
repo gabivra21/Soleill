@@ -1,32 +1,49 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorCliente implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private ArrayList<ClienteComum> listaClientes;
+    private ArrayList<ClienteComum> listaClientesComuns;
+    private ArrayList<ClientePremium> listaClientesPremium;
+    private ArrayList<Cliente> listaTodosClientes;
 
     public GerenciadorCliente() {
-        listaClientes = new ArrayList<>();
-        carregarClientes(); // Carregar clientes ao iniciar o gerenciador
+        listaClientesComuns = new ArrayList<>();
+        listaClientesPremium = new ArrayList<>();
+        listaTodosClientes = new ArrayList<>();
     }
 
-    public void adicionarCliente(ClienteComum cliente) {
-        listaClientes.add(cliente);
-        salvarClientes(); // Salvar após adicionar um cliente
+    public void adicionarClienteComum(ClienteComum cliente) {
+        listaClientesComuns.add(cliente);
+        listaTodosClientes.add(cliente);
     }
 
-    public int obterIndiceCliente(String email) {
-        for (int i = 0; i < listaClientes.size(); i++) {
-            if (listaClientes.get(i).getEmail().equals(email)) {
-                return i;
-            }
-        }
-        return -1; // Retorna -1 se o cliente não for encontrado
+    public void adicionarClientePremium(ClientePremium cliente) {
+        listaClientesPremium.add(cliente);
+        listaTodosClientes.add(cliente);
     }
 
-    public ArrayList<ClienteComum> getListaClientes() {
-        return listaClientes;
+    public void removerClienteComum(ClienteComum cliente) {
+        listaClientesComuns.remove(cliente);
+        listaTodosClientes.remove(cliente);
+    }
+
+    public void removerClientePremium(ClientePremium cliente) {
+        listaClientesPremium.remove(cliente);
+        listaTodosClientes.remove(cliente);
+    }
+
+    public ArrayList<ClienteComum> getListaClientesComuns() {
+        return listaClientesComuns;
+    }
+
+    public ArrayList<ClientePremium> getListaClientesPremium() {
+        return listaClientesPremium;
+    }
+
+    public ArrayList<Cliente> getListaTodosClientes() {
+        return listaTodosClientes;
     }
 
     public void cadastrarCliente() {
@@ -54,54 +71,63 @@ public class GerenciadorCliente implements Serializable {
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0); // Inicializar o carrinho vazio
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
-        adicionarCliente(novoCliente); // Adicionar e salvar o cliente
 
+        listaClientesComuns.add(novoCliente);
+        listaTodosClientes.add(novoCliente);
         System.out.println("Cliente cadastrado com sucesso!!");
     }
 
     public void listarClientes() {
-        if (listaClientes.isEmpty()) {
+        if (listaTodosClientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
         } else {
-            for (Cliente cliente : listaClientes) {
+            for (Cliente cliente : listaTodosClientes) {
                 System.out.println(cliente);
                 System.out.println("---------------");
             }
         }
     }
 
+    // Outros métodos, como logar, salvarClientes, carregarClientes, etc.
+
+
+public Cliente logar(String email, String senha) {
+        for (Cliente cliente : listaTodosClientes) {
+            if (cliente.getEmail().equals(email) && cliente.getSenha().equals(senha)) {
+                System.out.println("Login bem-sucedido.");
+                return cliente;
+            }
+        }
+        System.out.println("Email ou senha incorretos.");
+        return null;
+    }
+
+    // Métodos de salvar e carregar clientes (existentes)
     public void salvarClientes() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("clientes.dat"))) {
-            outputStream.writeObject(listaClientes);
-            //System.out.println("Clientes salvos com sucesso!");
+            List<Cliente> todosClientes = getListaTodosClientes();
+            outputStream.writeObject(todosClientes);
+            System.out.println("Clientes salvos com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao salvar clientes: " + e.getMessage());
         }
     }
 
     public void carregarClientes() {
-        File file = new File("clientes.dat");
-        if (!file.exists()) {
-            System.out.println("Nenhum cliente cadastrado previamente.");
-            return;
-        }
-
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
-            listaClientes = (ArrayList<ClienteComum>) inputStream.readObject();
-            //System.out.println("Clientes carregados com sucesso!");
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
+            List<Cliente> todosClientes = (List<Cliente>) inputStream.readObject();
+            listaClientesComuns.clear();
+            listaClientesPremium.clear();
+            for (Cliente cliente : todosClientes) {
+                if (cliente instanceof ClienteComum) {
+                    listaClientesComuns.add((ClienteComum) cliente);
+                } else if (cliente instanceof ClientePremium) {
+                    listaClientesPremium.add((ClientePremium) cliente);
+                }
+            }
+            System.out.println("Clientes carregados com sucesso!");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Erro ao carregar clientes: " + e.getMessage());
         }
-    }
-
-    public Cliente logar(String email, String senha) {
-        for (ClienteComum cliente : listaClientes) {
-            if (cliente.getEmail().equals(email) && cliente.getSenha().equals(senha)) {
-                System.out.println("Login bem-sucedido!");
-                return cliente;
-            }
-        }
-        System.out.println("Email ou senha incorretos.");
-        return null;
     }
 }
