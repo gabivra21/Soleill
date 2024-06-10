@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.io.Serializable;
 
 
-public class ClienteComum extends Cliente implements Serializable {
+
+public class ClienteComum extends Cliente  {
 
     public ClienteComum() {
-        // Construtor padrão necessário para a desserialização
+
     }
 
     public ClienteComum(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
@@ -27,10 +27,10 @@ public class ClienteComum extends Cliente implements Serializable {
 
         }
 
-    public void ativarAssinatura(GerenciadorCliente gerenciador, ClienteComum clienteComum) {
-        gerenciador.removerClienteComum(clienteComum);
-        ClientePremium clientePremium = new ClientePremium(clienteComum.getNome(), clienteComum.getEmail(), clienteComum.getCelular(), clienteComum.getSenha(), clienteComum.getSaldo(), clienteComum.getCarrinho(), clienteComum.getEndereco(), true, "data de validade");
-        gerenciador.adicionarClientePremium(clientePremium);
+    public void ativarAssinatura(GerenciadorCliente gerenciadorCliente) {
+        gerenciadorCliente.removerClienteComum(this);
+        ClientePremium clientePremium = new ClientePremium(nome, email, celular, senha, saldo, carrinho, endereco, true, validadeAssinatura);;
+        gerenciadorCliente.adicionarClientePremium(clientePremium);
         System.out.println("Assinatura ativada com sucesso!");
     }
 }
