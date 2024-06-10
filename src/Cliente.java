@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -55,6 +57,15 @@ public abstract class Cliente implements Serializable {
                 "Validade da Assinatura: " + validadeAssinatura + "\n";
     }
 
+    public static void salvarClienteNoArquivo(Cliente cliente) {
+        try (FileWriter writer = new FileWriter("cliente.txt", true)) {
+            writer.write(cliente.toString());
+            writer.write("\n");
+            System.out.println("Cliente salvo com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao salvar o cliente: " + e.getMessage());
+        }
+    }
 
     public String getNome() {
         return nome;
