@@ -1,7 +1,7 @@
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public class Carrinho implements Serializable {
+public class Carrinho  {
     private ArrayList<Produto> itens;
     private int qtdItens;
 
@@ -84,9 +84,5 @@ public class Carrinho implements Serializable {
         }
     }
 
-    /*public void addItem(String produtoA) {
-        this.itens.add(produtoA);
-        this.qtdItens++;
-        this.valorTotal += produtoA.getValor();
-    }*/
+
 }
