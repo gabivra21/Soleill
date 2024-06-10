@@ -1,18 +1,16 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public abstract class Cliente implements Serializable {
-    private String nome;
-    private String email;
-    private String celular;
-    private String senha;
-    private float saldo;
+public abstract class Cliente {
+    protected String nome;
+    protected String email;
+    protected String celular;
+    protected String senha;
+    protected float saldo;
     protected Carrinho carrinho;
-    private String endereco;
+    protected String endereco;
     private boolean assinaturaAtiva;
-    private String validadeAssinatura;
+    protected String validadeAssinatura;
 
     public Cliente(String nome, String email, String celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
@@ -30,11 +28,30 @@ public abstract class Cliente implements Serializable {
     protected Cliente() {
     }
 
+
+
+
     public String toFileString() {
-        // Formatar os dados do cliente como uma linha de texto
         return nome + "," + email + "," + celular + "," + senha + "," + saldo + "," + endereco + "," + assinaturaAtiva + "," + validadeAssinatura;
     }
 
+    public static Cliente fromFileString(String fileString) {
+        String[] parts = fileString.split(",");
+        String nome = parts[0];
+        String email = parts[1];
+        String celular = parts[2];
+        String senha = parts[3];
+        float saldo = Float.parseFloat(parts[4]);
+        String endereco = parts[5];
+        boolean assinaturaAtiva = Boolean.parseBoolean(parts[6]);
+        String validadeAssinatura = parts[7];
+        Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0f); // Ajuste conforme necessário
+        if (assinaturaAtiva) {
+            return new ClientePremium(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
+        } else {
+            return new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
+        }
+    }
 
     public void criarPedido(String endEntrega, int prazoEntrega) {
         int qtdeItens = carrinho.getItens().size();
@@ -57,15 +74,6 @@ public abstract class Cliente implements Serializable {
                 "Validade da Assinatura: " + validadeAssinatura + "\n";
     }
 
-    public static void salvarClienteNoArquivo(Cliente cliente) {
-        try (FileWriter writer = new FileWriter("cliente.txt", true)) {
-            writer.write(cliente.toString());
-            writer.write("\n");
-            System.out.println("Cliente salvo com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao salvar o cliente: " + e.getMessage());
-        }
-    }
 
     public String getNome() {
         return nome;
@@ -144,12 +152,8 @@ public abstract class Cliente implements Serializable {
 
 
 
-    public ArrayList<Produto> criarLista(){
-        ArrayList<Produto> lista = new ArrayList<>();
-        return lista;
-    }
 
-    public void cadastrarEndereco( String endereco){
+    public void cadastrarEndereco(String endereco){
         this.setEndereco(endereco);
     }
 
