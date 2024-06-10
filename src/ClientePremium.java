@@ -1,6 +1,6 @@
-import java.io.Serializable;
 
-public class ClientePremium extends Cliente implements Serializable{
+
+public class ClientePremium extends Cliente {
     public ClientePremium(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
@@ -12,9 +12,9 @@ public class ClientePremium extends Cliente implements Serializable{
         return carrinho.calcularValorTotal();
     }
 
-    public void cancelarAssinatura(GerenciadorCliente gerenciador, ClientePremium clientePremium) {
-        gerenciador.removerClientePremium(clientePremium);
-        ClienteComum clienteComum = new ClienteComum(clientePremium.getNome(), clientePremium.getEmail(), clientePremium.getCelular(), clientePremium.getSenha(), clientePremium.getSaldo(), clientePremium.getCarrinho(), clientePremium.getEndereco(), false, null);
+    public void cancelarAssinatura(GerenciadorCliente gerenciador) {
+        gerenciador.removerClientePremium(this);
+        ClienteComum clienteComum = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, false, null);
         gerenciador.adicionarClienteComum(clienteComum);
         System.out.println("Assinatura cancelada com sucesso!");
     }

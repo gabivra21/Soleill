@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GerenciadorCliente implements Serializable {
+public class GerenciadorCliente  {
     private ArrayList<ClienteComum> listaClientesComuns;
     private ArrayList<ClientePremium> listaClientesPremium;
     private ArrayList<Cliente> listaTodosClientes;
@@ -12,6 +12,7 @@ public class GerenciadorCliente implements Serializable {
         listaClientesComuns = new ArrayList<>();
         listaClientesPremium = new ArrayList<>();
         listaTodosClientes = new ArrayList<>();
+        carregarClientes();
     }
 
     public void adicionarClienteComum(ClienteComum cliente) {
@@ -71,10 +72,10 @@ public class GerenciadorCliente implements Serializable {
         Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0); // Inicializar o carrinho vazio
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
-        Cliente novoCliente1 = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
+        Cliente c = novoCliente;
 
         listaClientesComuns.add(novoCliente);
-        listaTodosClientes.add(novoCliente1);
+        listaTodosClientes.add(c);
         salvarClientes();
         System.out.println("Cliente cadastrado com sucesso!!");
     }
@@ -111,33 +112,45 @@ public class GerenciadorCliente implements Serializable {
             System.out.println("Clientes salvos com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao salvar clientes: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public void carregarClientes() {
-        try (Scanner scanner = new Scanner(new File("clientes.txt"))) {
+        File file = new File("clientes.txt");
+        if (!file.exists()) {
+            System.out.println("Nenhum arquivo de clientes encontrado. Um novo arquivo será criado.");
+            return;
+        }
+
+        try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] parts = line.split(",");
-                String nome = parts[0];
-                String email = parts[1];
-                String celular = parts[2];
-                String senha = parts[3];
-                float saldo = Float.parseFloat(parts[4]);
-                // Adicionar outros campos conforme necessário
-                String endereco = parts[5];
-                boolean assinaturaAtiva = Boolean.parseBoolean(parts[6]);
-                String validadeAssinatura = parts[7];
-
-                // Carrinho - Vamos criar um novo carrinho vazio para cada cliente por enquanto
-                Carrinho carrinho = new Carrinho();
-
-                Cliente cliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
+                Cliente cliente = Cliente.fromFileString(line);
                 listaTodosClientes.add(cliente);
             }
             System.out.println("Clientes carregados com sucesso!");
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro ao carregar clientes: Arquivo não encontrado.");
+            e.printStackTrace();
+        } catch (Exception e) {
             System.out.println("Erro ao carregar clientes: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void ativarAssinaturaClienteADM(){
+        Scanner scannerAD = new Scanner(System.in);
+        System.out.print("Email do cliente para ativar assinatura: ");
+        String emailAtivacao = scannerAD.nextLine();
+        System.out.print("Senha: ");
+        String senhaAtivacao = scannerAD.nextLine();
+        Cliente clienteAtivacao = logar(emailAtivacao, senhaAtivacao);
+        if (clienteAtivacao instanceof ClienteComum) {
+            ((ClienteComum) clienteAtivacao).ativarAssinatura(this);
+            this.salvarClientes();
+        } else {
+            System.out.println("Cliente não encontrado ou já é premium.");
         }
     }
 }
