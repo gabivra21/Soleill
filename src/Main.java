@@ -79,7 +79,8 @@ public class Main {
         Menu menu = new Menu();
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
         GerenciadorProduto gerenciadorProduto = new GerenciadorProduto();
-        menu.printMenu(gerenciadorCliente, gerenciadorProduto, vestuario , calcados);
+        ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente = new ExcecaoSaldoInsuficiente();
+        menu.printMenu(gerenciadorProduto, vestuario, calcados, gerenciadorCliente, excecaoSaldoInsuficiente);
 
 
         /*cliente2.criarPedido("rua iaia", 12);
@@ -99,6 +100,16 @@ public class Main {
 
        // gerenciadorCliente.listarClientes();
         //gerenciadorCliente.getListaClientesComuns();
+
+        //gerenciadorCliente.getListaClientesPremium();
+        //gerenciadorCliente.getListaClientesComuns();
+
+        //cliente.criarPedido("Rua LA 33", 13);
+
+        //gerenciadorCliente.ativarAssinaturaClienteADM();
+
+
+
 
 
 
