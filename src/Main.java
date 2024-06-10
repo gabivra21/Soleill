@@ -106,7 +106,7 @@ public class Main {
 
         //cliente.criarPedido("Rua LA 33", 13);
 
-        gerenciadorCliente.ativarAssinaturaClienteADM();
+        //gerenciadorCliente.ativarAssinaturaClienteADM();
 
 
 

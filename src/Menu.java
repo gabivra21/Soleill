@@ -7,6 +7,7 @@ public class Menu {
 
     public void printMenu(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados,  GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) {
         Scanner scanner = new Scanner(System.in);
+
         int opcao;
 
         do {
@@ -16,7 +17,7 @@ public class Menu {
             System.out.println("3 - SAIR");
             System.out.print("Escolha a opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+            scanner.nextLine();
 
             if (opcao == 1) {
                 gerenciadorCliente.cadastrarCliente();
