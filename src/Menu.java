@@ -5,7 +5,7 @@ public class Menu {
     public Menu() {
     }
 
-    public void printMenu(GerenciadorCliente gerenciadorCliente, GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados) {
+    public void printMenu(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados,  GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
@@ -29,16 +29,7 @@ public class Menu {
 
                 Cliente cliente = gerenciadorCliente.logar(email, senha);
                 if (cliente != null) {
-                    // Verifica se o cliente é Premium ou Comum
-                    if (gerenciadorCliente.getListaClientesPremium().contains(cliente)) {
-                        System.out.println("Cliente Premium logado.");
-                        ClientePremium clientePremium = (ClientePremium) cliente;
-                        exibirMenuLogado(gerenciadorProduto, vestuario, calcados, clientePremium, gerenciadorCliente);
-                    } else if (gerenciadorCliente.getListaClientesComuns().contains(cliente)) {
-                        System.out.println("Cliente Comum logado.");
-                        ClienteComum clienteComum = (ClienteComum) cliente;
-                        exibirMenuLogado(gerenciadorProduto, vestuario, calcados, clienteComum, gerenciadorCliente);
-                    }
+                    exibirMenuLogado(gerenciadorProduto, vestuario, calcados, cliente, gerenciadorCliente, excecaoSaldoInsuficiente);
                 }
             } else if (opcao == 3) {
                 System.out.println("Saindo...");
@@ -49,7 +40,7 @@ public class Menu {
         } while (opcao != 3);
     }
 
-    public void exibirMenuLogado(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados, Cliente cliente, GerenciadorCliente gerenciadorCliente) {
+    public void exibirMenuLogado(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados, Cliente cliente, GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
@@ -58,8 +49,10 @@ public class Menu {
             System.out.println("1 - Listar Nosso Vestuário.");
             System.out.println("2 - Listar Calçados.");
             System.out.println("3 - Adicionar produto ao carrinho.");
-            System.out.println("4 - Visualizar Carrinho.");
-            System.out.println("5 - Sair.");
+            System.out.println("4 - Remover produto do carrinho.");
+            System.out.println("5 - Visualizar Carrinho.");
+            System.out.println("6 - Sair.");
+
 
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -87,6 +80,18 @@ public class Menu {
                     }
                     break;
                 case 4:
+                    System.out.println("Digite o nome do item:");
+                    String nomeProdutoR = scanner.nextLine();
+
+                    Produto produtoR = buscarProduto(nomeProdutoR, vestuario, calcados);
+                    if (produtoR != null) {
+                        cliente.getCarrinho().removerItem(produtoR);
+                        System.out.println("Produto removido do carrinho.");
+                    } else {
+                        System.out.println("Produto não encontrado.");
+                    }
+                    break;
+                case 5:
                     System.out.println("------------ Visualização do Carrinho ------------");
                     cliente.getCarrinho().exibirCarrinho(cliente);
                     System.out.println("Deseja concluir a compra?");
@@ -97,22 +102,47 @@ public class Menu {
                     if(opc == 1){
                         if (gerenciadorCliente.getListaClientesComuns().contains(cliente)){
                             cliente.comprar(cliente.carrinho);
+                            System.out.println("O seu saldo atual é de: "+cliente.getSaldo());
+                            System.out.println("Para confirmar o pagamen você deve aumentá-lo!");
+                            System.out.println("Digite a quantia a adicionar: ");
+                            Scanner scannerQT = new Scanner(System.in);
+                            float qt = scannerQT.nextFloat();
+
+                            cliente.setSaldo(cliente.getSaldo() + qt);
+                            System.out.println("Para confirmar o pagamento DIGITE 1 \n Para fechar o site DIGITE 2:");
+                            Scanner scannerP = new Scanner(System.in);
+                            int confirmacao = scannerP.nextInt();
+                            if (confirmacao == 1){
+                                if (cliente.getSaldo() > cliente.carrinho.getValorTotal()){
+                                    System.out.println("Compra realizada!");
+                                    cliente.criarPedido(cliente.getEndereco(),15);
+
+                                }else {
+                                    excecaoSaldoInsuficiente.exibirEX();
+                                }
+                            } else if (confirmacao == 2) {
+                                System.exit(2);
+                            }
+
                         }
                         if (gerenciadorCliente.getListaClientesPremium().contains(cliente)){
                             cliente.comprar(cliente.carrinho);
                         }
-                    }else{
+                    }else if (opc == 2) {
                         System.out.println("Tudo bem!Talvez na próxima :( ");
+                    }else {
+                        System.out.println("Opção inválida");
                     }
 
                     break;
-                case 5:
+                case 6:
                     System.out.println("Saindo...");
                     break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 5);
+        } while (opcao != 6);
     }
 
     private Produto buscarProduto(String nomeProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados) {
