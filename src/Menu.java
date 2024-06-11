@@ -7,6 +7,7 @@ public class Menu {
 
     public void printMenu(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados,  GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) {
         Scanner scanner = new Scanner(System.in);
+
         int opcao;
 
         do {
@@ -16,7 +17,7 @@ public class Menu {
             System.out.println("3 - SAIR");
             System.out.print("Escolha a opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+            scanner.nextLine();
 
             if (opcao == 1) {
                 gerenciadorCliente.cadastrarCliente();
@@ -103,7 +104,7 @@ public class Menu {
                         if (gerenciadorCliente.getListaClientesComuns().contains(cliente)){
                             cliente.comprar(cliente.carrinho);
                             System.out.println("O seu saldo atual é de: "+cliente.getSaldo());
-                            System.out.println("Para confirmar o pagamen você deve aumentá-lo!");
+                            System.out.println("Para confirmar o pagamento você deve aumentá-lo!");
                             System.out.println("Digite a quantia a adicionar: ");
                             Scanner scannerQT = new Scanner(System.in);
                             float qt = scannerQT.nextFloat();
@@ -115,6 +116,8 @@ public class Menu {
                             if (confirmacao == 1){
                                 if (cliente.getSaldo() > cliente.carrinho.getValorTotal()){
                                     System.out.println("Compra realizada!");
+                                    float va = (float) (cliente.getSaldo() - cliente.carrinho.getValorTotal());
+                                    cliente.setSaldo(va);
                                     cliente.criarPedido(cliente.getEndereco(),15);
 
                                 }else {
@@ -124,9 +127,32 @@ public class Menu {
                                 System.exit(2);
                             }
 
-                        }
-                        if (gerenciadorCliente.getListaClientesPremium().contains(cliente)){
+                        }if (gerenciadorCliente.getListaClientesPremium().contains(cliente)){
                             cliente.comprar(cliente.carrinho);
+                            System.out.println("O seu saldo atual é de: "+cliente.getSaldo());
+                            System.out.println("Para confirmar o pagamento você deve aumentá-lo!");
+                            System.out.println("Digite a quantia a adicionar: ");
+                            Scanner scannerQT = new Scanner(System.in);
+                            float qt = scannerQT.nextFloat();
+
+                            cliente.setSaldo(cliente.getSaldo() + qt);
+                            System.out.println("Para confirmar o pagamento DIGITE 1 \n Para fechar o site DIGITE 2:");
+                            Scanner scannerP = new Scanner(System.in);
+                            int confirmacao = scannerP.nextInt();
+                            if (confirmacao == 1){
+                                if (cliente.getSaldo() > cliente.carrinho.getValorTotal()){
+                                    System.out.println("Compra realizada!");
+                                    float va = (float) (cliente.getSaldo() - cliente.carrinho.getValorTotal());
+                                    cliente.setSaldo(va);
+                                    cliente.criarPedido(cliente.getEndereco(),15);
+
+                                }else {
+                                    excecaoSaldoInsuficiente.exibirEX();
+                                }
+                            } else if (confirmacao == 2) {
+                                System.exit(2);
+                            }
+
                         }
                     }else if (opc == 2) {
                         System.out.println("Tudo bem!Talvez na próxima :( ");
