@@ -69,13 +69,13 @@ public class GerenciadorCliente  {
         String validadeAssinatura = null;
         float saldo = 0.0f;
 
-        Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0); // Inicializar o carrinho vazio
+        Carrinho carrinho = new Carrinho(new ArrayList<Produto>(), 0, null, 0.0);
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
-        Cliente c = novoCliente;
+
 
         listaClientesComuns.add(novoCliente);
-        listaTodosClientes.add(c);
+        listaTodosClientes.add(novoCliente);
         salvarClientes();
         System.out.println("Cliente cadastrado com sucesso!!");
     }
@@ -103,7 +103,7 @@ public class GerenciadorCliente  {
         return null;
     }
 
-    // Métodos de salvar e carregar clientes (existentes)
+
     public void salvarClientes() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("clientes.txt"))) {
             for (Cliente cliente : listaTodosClientes) {
@@ -128,6 +128,7 @@ public class GerenciadorCliente  {
                 String line = scanner.nextLine();
                 Cliente cliente = Cliente.fromFileString(line);
                 listaTodosClientes.add(cliente);
+                listaClientesComuns.add((ClienteComum) cliente);
             }
             System.out.println("Clientes carregados com sucesso!");
         } catch (FileNotFoundException e) {
@@ -153,4 +154,5 @@ public class GerenciadorCliente  {
             System.out.println("Cliente não encontrado ou já é premium.");
         }
     }
+
 }
