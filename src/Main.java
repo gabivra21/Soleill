@@ -26,10 +26,6 @@ public class Main {
 
 
         ArrayList<Produto> calcados = new ArrayList<>();
-
-        Cliente cliente = new ClienteComum("Leticia Aiko", "letaaiko@gmail.com","999997654", "solraiar", 23.9f, new Carrinho(new ArrayList<Produto>(), 0,null, 0.0),"RuaLilas 899",false,"12/11/2024");
-        cliente.carrinho.setCliente(cliente);
-
         ArrayList<Produto> vestuario = new ArrayList<>();
 
         vestuario.add(calca);
@@ -55,24 +51,6 @@ public class Main {
         calcados.add(veja);
         calcados.add(salto);
 
-        //System.out.println(calcados);
-        //cliente.visualizarProduto(calca);
-        
-
-        cliente.setNome("Lucia");
-        cliente.carrinho.addItem(bota);
-        //cliente.comprar(cliente.carrinho);
-
-        Cliente cliente2 = new ClientePremium("Lara", "lara@gmail.com","998766609","aloha",0,new Carrinho(new ArrayList<Produto>(),0,null,0.0), "Rua Tipo 123", true,"21/10/2024");
-        cliente.carrinho.setCliente(cliente2);
-
-        /*cliente2.cadastrarEndereco("Rua iaia");
-        System.out.println("***********************************");
-        cliente2.comprar(cliente2.carrinho);
-        cliente2.carrinho.addItem(regata);
-        cliente2.comprar(cliente2.carrinho);
-        System.out.println("***********************************");
-        cliente.comprar(cliente.camainrinho);*/
 
         System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
@@ -83,46 +61,5 @@ public class Main {
         menu.printMenu(gerenciadorProduto, vestuario, calcados, gerenciadorCliente, excecaoSaldoInsuficiente);
 
 
-        /*cliente2.criarPedido("rua iaia", 12);
-        cliente.criarPedido("rua ioooo",14);
-        cliente.criarPedido("rua lala",13);*/
-
-
-        // Carregar clientes ao iniciar o gerenciador
-        //gerenciadorCliente.carregarClientes();
-
-        // Cadastrar novo cliente
-        //gerenciadorCliente.cadastrarCliente();
-
-        // Listar clientes
-        //gerenciadorCliente.listarClientes();
-        //gerenciadorCliente.logar("gabi@gmail.com","azul");
-
-       // gerenciadorCliente.listarClientes();
-        //gerenciadorCliente.getListaClientesComuns();
-
-        //gerenciadorCliente.getListaClientesPremium();
-        //gerenciadorCliente.getListaClientesComuns();
-
-        //cliente.criarPedido("Rua LA 33", 13);
-
-        //gerenciadorCliente.ativarAssinaturaClienteADM();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+           }
 }
