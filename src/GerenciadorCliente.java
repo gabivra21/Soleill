@@ -130,7 +130,7 @@ public class GerenciadorCliente  {
                 listaTodosClientes.add(cliente);
                 listaClientesComuns.add((ClienteComum) cliente);
             }
-            System.out.println("Clientes carregados com sucesso!");
+            System.out.println("----------------------------------");
         } catch (FileNotFoundException e) {
             System.out.println("Erro ao carregar clientes: Arquivo não encontrado.");
             e.printStackTrace();
@@ -154,5 +154,30 @@ public class GerenciadorCliente  {
             System.out.println("Cliente não encontrado ou já é premium.");
         }
     }
+
+    public void listarPedidos() {
+        File file = new File("pedido.txt");
+        if (!file.exists()) {
+            System.out.println("Nenhum arquivo de pedidos encontrado.");
+            return;
+        }
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                System.out.println(line);
+            }
+            System.out.println("Pedidos listados com sucesso!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro ao carregar pedidos: Arquivo não encontrado.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar pedidos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }
