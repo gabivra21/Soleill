@@ -1,9 +1,15 @@
-public class ExcecaoSaldoInsuficiente extends Exception{
-    public ExcecaoSaldoInsuficiente(){
+public class ExcecaoSaldoInsuficiente extends Exception {
+    private static final String MENSAGEM_PADRAO = "Saldo Insuficiente :(\n Adicione mais ou encerre a compra.";
 
+    public ExcecaoSaldoInsuficiente() {
+        super(MENSAGEM_PADRAO);
+    }
+
+    public ExcecaoSaldoInsuficiente(String mensagem) {
+        super(mensagem);
     }
 
     public void exibirEX() {
-        System.out.println("O saldo é insuficiente \n Por favor adicione mais saldo ou cancele a compra!");
+        System.out.println("Erro: " + getMessage());
     }
 }
