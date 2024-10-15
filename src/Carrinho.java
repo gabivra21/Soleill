@@ -4,21 +4,26 @@ import java.util.ArrayList;
 public class Carrinho  {
     private ArrayList<Produto> itens;
     private int qtdItens;
+    private static Carrinho instancia;
 
     private Cliente cliente;
     private double valorTotal;
 
-    public Carrinho(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
+    private Carrinho(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
         this.itens = itens != null ? itens : new ArrayList<>();
         this.qtdItens = qtdItens;
         this.cliente = cliente;
         this.valorTotal = valorTotal;
     }
 
-    public Carrinho() {
+    private Carrinho() {}
 
+    public static Carrinho getInstance(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
+        if (instancia == null) {
+            instancia = new Carrinho(itens, qtdItens, cliente, valorTotal);
+        }
+        return instancia;
     }
-
 
     public void addItem(Produto produto) {
         this.itens.add(produto);
