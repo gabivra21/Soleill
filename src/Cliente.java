@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public abstract class Cliente {
@@ -12,6 +11,7 @@ public abstract class Cliente {
     private boolean assinaturaAtiva;
     protected String validadeAssinatura;
 
+
     public Cliente(String nome, String email, String celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
         this.email = email;
@@ -22,7 +22,6 @@ public abstract class Cliente {
         this.endereco = endereco;
         this.assinaturaAtiva = false;
         this.validadeAssinatura = null;
-
     }
 
     protected Cliente() {
@@ -172,9 +171,4 @@ public abstract class Cliente {
             System.out.println("Nenhuma assinatura ativa para cancelar.");
         }
     }
-
-
-
-
-
 }
