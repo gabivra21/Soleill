@@ -22,7 +22,15 @@ public abstract class Cliente {
         this.endereco = endereco;
         this.assinaturaAtiva = false;
         this.validadeAssinatura = null;
+        carrinho.registerObserver(this);
 
+    }
+    
+    @Override
+    public void update(Carrinho carrinho) {
+        System.out.println("Carrinho atualizado para o cliente " + this.nome + ":");
+        System.out.println("Quantidade de itens: " + carrinho.getQtdItens());
+        System.out.println("Valor total: " + carrinho.getValorTotal());
     }
 
     protected Cliente() {
