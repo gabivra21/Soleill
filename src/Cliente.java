@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 
-public abstract class Cliente {
+public abstract class Cliente implements Observer{
     protected String nome;
     protected String email;
     protected String celular;
