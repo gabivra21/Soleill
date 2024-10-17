@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class FileClienteAdapter implements ClienteAdapter {
     private String filename;
+    
 
     public FileClienteAdapter(String filename) {
         this.filename = filename;

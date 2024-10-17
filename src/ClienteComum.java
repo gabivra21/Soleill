@@ -33,5 +33,6 @@ public class ClienteComum extends Cliente  {
         gerenciadorCliente.adicionarClientePremium(clientePremium);
         System.out.println("Assinatura ativada com sucesso!");
     }
+
 }
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorCliente  {
+	private static GerenciadorCliente instancia;
 	private FileClienteAdapter ClienteAdapter;
     private ArrayList<ClienteComum> listaClientesComuns;
     private ArrayList<ClientePremium> listaClientesPremium;
@@ -16,6 +17,13 @@ public class GerenciadorCliente  {
         listaTodosClientes = new ArrayList<>();
         carregarClientes();
     }
+    
+    public static GerenciadorCliente getInstance() throws IOException {
+    	if (instancia == null) {
+    		instancia = new GerenciadorCliente();
+    	}
+    	return instancia;
+    };
 
     public void adicionarClienteComum(ClienteComum cliente) {
         listaClientesComuns.add(cliente);

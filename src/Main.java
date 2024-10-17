@@ -57,7 +57,7 @@ public class Main {
         System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
         Menu menu = new Menu();
-        GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
+        GerenciadorCliente gerenciadorCliente = GerenciadorCliente.getInstance();
         gerenciadorCliente.listarClientes();
         GerenciadorProduto gerenciadorProduto = new GerenciadorProduto();
         ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente = new ExcecaoSaldoInsuficiente();

@@ -58,7 +58,7 @@ public class Menu {
 
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -101,20 +101,20 @@ public class Menu {
                     System.out.println("1. Sim");
                     System.out.println("2. Não");
                     int opc = scanner.nextInt();
-                    scanner.nextLine(); // Limpar o buffer
+                    scanner.nextLine();
 
                     if (opc == 1) {
                         if (gerenciadorCliente.getListaClientesComuns().contains(cliente) || gerenciadorCliente.getListaClientesPremium().contains(cliente)) {
                             cliente.comprar(cliente.getCarrinho());
                             System.out.println("O seu saldo atual é de: R$" + cliente.getSaldo());
 
-                            // Payment section: Add funds and confirm payment
+                            
                             System.out.println("Digite a quantia a adicionar ao saldo: ");
                             float qt = scanner.nextFloat();
                             cliente.setSaldo(cliente.getSaldo() + qt);
                             System.out.println("Saldo atualizado: R$" + cliente.getSaldo());
 
-                            // Select payment method
+                            
                             System.out.println("Escolha o método de pagamento:");
                             System.out.println("1. Cartão de Crédito");
                             System.out.println("2. PayPal");
@@ -131,7 +131,7 @@ public class Menu {
                                 break;
                             }
 
-                            // Confirm payment
+                            
                             if (cliente.getSaldo() >= cliente.getCarrinho().getValorTotal()) {
                                 paymentStrategy.pay(cliente.getCarrinho().getValorTotal());
                                 cliente.setSaldo(cliente.getSaldo() - cliente.getCarrinho().getValorTotal());
