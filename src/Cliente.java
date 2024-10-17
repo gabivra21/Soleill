@@ -7,7 +7,7 @@ public abstract class Cliente {
     protected String celular;
     protected String senha;
     protected float saldo;
-    protected Carrinho carrinho;
+    protected CarrinhoSingleton carrinho;
     protected String endereco;
     private boolean assinaturaAtiva;
     protected String validadeAssinatura;
@@ -45,7 +45,7 @@ public abstract class Cliente {
         String endereco = parts[5];
         boolean assinaturaAtiva = Boolean.parseBoolean(parts[6]);
         String validadeAssinatura = parts[7];
-        Carrinho carrinho = Carrinho.getInstance(new ArrayList<Produto>(), 0, null, 0.0f); // Ajuste conforme necessário
+        CarrinhoSingleton carrinho = Carrinho.getInstance(new ArrayList<Produto>(), 0, null, 0.0f); // Ajuste conforme necessário
         if (assinaturaAtiva) {
             return new ClientePremium(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
         } else {
