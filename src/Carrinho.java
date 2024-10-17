@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Carrinho  {
     private ArrayList<Produto> itens;
     private int qtdItens;
+    private ArrayList<Observer> observers;
 
     private Cliente cliente;
     private double valorTotal;
@@ -13,6 +14,7 @@ public class Carrinho  {
         this.qtdItens = qtdItens;
         this.cliente = cliente;
         this.valorTotal = valorTotal;
+        this.observers = new ArrayList<>();
     }
 
     public Carrinho() {
@@ -24,6 +26,8 @@ public class Carrinho  {
         this.itens.add(produto);
         this.qtdItens++;
         this.valorTotal += produto.getValor();
+        notifyObservers();
+
     }
 
 
@@ -31,8 +35,23 @@ public class Carrinho  {
         this.itens.remove(produto);
         this.qtdItens--;
         this.valorTotal -= produto.getValor();
+        notifyObservers();
     }
 
+        public void registerObserver(Observer observer) {
+        this.observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        this.observers.remove(observer);
+    }
+
+    
+    private void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(this); 
+        }
+    }
     public double calcularValorTotal() {
         double total = 0.0;
         for (Produto produto : itens) {
