@@ -6,6 +6,8 @@ public class PagamentoAdapter {
     }
 
     public void processarPagamento(Pedido pedido) {
-        sistemaPagamentoExterno.processarPagamento(pedido.getNomeCliente(), pedido.getValorTotal());
+        int valorEmCentavos = (int) Math.round(pedido.getValorTotal() * 100);
+        sistemaPagamentoExterno.processarPagamento(pedido.getNomeCliente(), valorEmCentavos);
     }
+
 }

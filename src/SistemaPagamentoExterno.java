@@ -1,5 +1,5 @@
 public class SistemaPagamentoExterno {
-    public void processarPagamento(String nomeCliente, double valor) {
-        System.out.println("Pagamento processado para o cliente " + nomeCliente + " no valor de R$ " + valor);
+    public void processarPagamento(String nomeCliente, int valorEmCentavos) {
+        System.out.println("Pagamento processado para o cliente " + nomeCliente + " no valor de R$ " + (valorEmCentavos / 100.0));
     }
 }

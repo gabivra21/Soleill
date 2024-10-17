@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        // Criando produtos
         Produto calca = new Vestuario(43.1f, "calça jeans preta", 21);
         Produto camisa = new Vestuario(79.99f, "camisa polo azul", 80);
         Produto regata = new Vestuario(29.99f, "regata curta preta", 21);
@@ -26,7 +25,6 @@ public class Main {
         Produto veja = new Calcado(799.f, "Veja Campo", 18);
         Produto salto= new Calcado(199.f, "Salto preto", 21);
 
-        // Adicionando produtos aos arrays
         ArrayList<Produto> calcados = new ArrayList<>();
         ArrayList<Produto> vestuario = new ArrayList<>();
 
@@ -52,42 +50,33 @@ public class Main {
         calcados.add(veja);
         calcados.add(salto);
 
-        // Exibindo mensagem de boas-vindas
         System.out.println("************** BEM VINDO A SOLEILL **************\n A melhor loja de vestuários e calçados que encontrará!!!");
         System.out.println("");
 
-        // Criando o carrinho com os itens de vestuário
-        Carrinho carrinho = new Carrinho(vestuario, vestuario.size(), null, 500.0); // Carrinho temporário sem cliente
+        Carrinho carrinho = new Carrinho(vestuario, vestuario.size(), null, 500.0);
 
-        // Criando o cliente comum com os atributos especificados
         ClienteComum cliente = new ClienteComum(
-                "João", // Nome
-                "joao@example.com", // Email
-                "123456789", // Celular
-                "senhaSegura", // Senha
-                1000.0f, // Saldo
-                carrinho, // Carrinho
-                "Rua A, 123", // Endereço
-                false, // Assinatura ativa
-                "N/A" // Validade da assinatura
+                "João",
+                "joao@example.com",
+                "123456789",
+                "senhaSegura",
+                1000.0f,
+                carrinho,
+                "Rua A, 123",
+                false,
+                "N/A"
         );
 
-        // Associando o cliente ao carrinho
         carrinho.setCliente(cliente);
 
-        // Criando o pedido
         Pedido pedido = new Pedido(cliente.getNome(), carrinho.getQtdItens(), carrinho.getItens(), carrinho.getValorTotal(), 5, false, cliente.getEndereco());
 
-        // Criando o sistema de pagamento externo
         SistemaPagamentoExterno sistemaPagamentoExterno = new SistemaPagamentoExterno();
 
-        // Usando o adapter para processar o pagamento
         PagamentoAdapter pagamentoAdapter = new PagamentoAdapter(sistemaPagamentoExterno);
 
-        // Processando o pagamento do pedido
         pagamentoAdapter.processarPagamento(pedido);
 
-        // Exibindo o menu (mantendo o menu conforme solicitado)
         Menu menu = new Menu();
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
         GerenciadorProduto gerenciadorProduto = new GerenciadorProduto();
