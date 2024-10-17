@@ -6,13 +6,13 @@ public abstract class Cliente {
     protected String email;
     protected String celular;
     protected String senha;
-    protected float saldo;
+    protected double saldo;
     protected Carrinho carrinho;
     protected String endereco;
     private boolean assinaturaAtiva;
     protected String validadeAssinatura;
 
-    public Cliente(String nome, String email, String celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
+    public Cliente(String nome, String email, String celular, String senha,double saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
@@ -27,8 +27,6 @@ public abstract class Cliente {
 
     protected Cliente() {
     }
-
-
 
 
     public String toFileString() {
@@ -107,11 +105,11 @@ public abstract class Cliente {
         this.senha = senha;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(float saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

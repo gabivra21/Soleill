@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import Pagamento.*;
 
 public class Menu {
     public Menu() {
@@ -54,7 +55,6 @@ public class Menu {
             System.out.println("5 - Visualizar Carrinho.");
             System.out.println("6 - Sair.");
 
-
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine(); // Limpar o buffer do scanner
@@ -95,76 +95,58 @@ public class Menu {
                 case 5:
                     System.out.println("------------ Visualização do Carrinho ------------");
                     cliente.getCarrinho().exibirCarrinho(cliente);
+
                     System.out.println("Deseja concluir a compra?");
                     System.out.println("1. Sim");
                     System.out.println("2. Não");
-                    Scanner scannerT = new Scanner(System.in);
-                    int opc = scannerT.nextInt();
-                    if(opc == 1){
-                        if (gerenciadorCliente.getListaClientesComuns().contains(cliente)){
-                            cliente.comprar(cliente.carrinho);
-                            System.out.println("O seu saldo atual é de: "+cliente.getSaldo());
-                            System.out.println("Para confirmar o pagamento você deve aumentá-lo!");
-                            System.out.println("Digite a quantia a adicionar: ");
-                            Scanner scannerQT = new Scanner(System.in);
-                            float qt = scannerQT.nextFloat();
+                    int opc = scanner.nextInt();
+                    scanner.nextLine(); // Limpar o buffer
 
+                    if (opc == 1) {
+                        if (gerenciadorCliente.getListaClientesComuns().contains(cliente) || gerenciadorCliente.getListaClientesPremium().contains(cliente)) {
+                            cliente.comprar(cliente.getCarrinho());
+                            System.out.println("O seu saldo atual é de: R$" + cliente.getSaldo());
+
+                            // Payment section: Add funds and confirm payment
+                            System.out.println("Digite a quantia a adicionar ao saldo: ");
+                            float qt = scanner.nextFloat();
                             cliente.setSaldo(cliente.getSaldo() + qt);
-                            System.out.println("Para confirmar o pagamento DIGITE 1 \n Para fechar o site DIGITE 2:");
-                            Scanner scannerP = new Scanner(System.in);
-                            int confirmacao = scannerP.nextInt();
-                            if (confirmacao == 1){
-                                if (cliente.getSaldo() > cliente.carrinho.getValorTotal()){
-                                    System.out.println("Compra realizada!");
-                                    float va = (float) (cliente.getSaldo() - cliente.carrinho.getValorTotal());
-                                    cliente.setSaldo(va);
-                                    cliente.criarPedido(cliente.getEndereco(),15);
+                            System.out.println("Saldo atualizado: R$" + cliente.getSaldo());
 
-                                }else {
-                                    excecaoSaldoInsuficiente.exibirEX();
-                                }
-                            } else if (confirmacao == 2) {
-                                System.exit(2);
+                            // Select payment method
+                            System.out.println("Escolha o método de pagamento:");
+                            System.out.println("1. Cartão de Crédito");
+                            System.out.println("2. PayPal");
+                            int pagamentoOpcao = scanner.nextInt();
+                            scanner.nextLine();
+
+                            PaymentStrategy paymentStrategy;
+                            if (pagamentoOpcao == 1) {
+                                paymentStrategy = new CreditCardPayment();
+                            } else if (pagamentoOpcao == 2) {
+                                paymentStrategy = new PayPalPayment();
+                            } else {
+                                System.out.println("Opção inválida. Cancelando pagamento.");
+                                break;
                             }
 
-                        }if (gerenciadorCliente.getListaClientesPremium().contains(cliente)){
-                            cliente.comprar(cliente.carrinho);
-                            System.out.println("O seu saldo atual é de: "+cliente.getSaldo());
-                            System.out.println("Para confirmar o pagamento você deve aumentá-lo!");
-                            System.out.println("Digite a quantia a adicionar: ");
-                            Scanner scannerQT = new Scanner(System.in);
-                            float qt = scannerQT.nextFloat();
-
-                            cliente.setSaldo(cliente.getSaldo() + qt);
-                            System.out.println("Para confirmar o pagamento DIGITE 1 \n Para fechar o site DIGITE 2:");
-                            Scanner scannerP = new Scanner(System.in);
-                            int confirmacao = scannerP.nextInt();
-                            if (confirmacao == 1){
-                                if (cliente.getSaldo() > cliente.carrinho.getValorTotal()){
-                                    System.out.println("Compra realizada!");
-                                    float va = (float) (cliente.getSaldo() - cliente.carrinho.getValorTotal());
-                                    cliente.setSaldo(va);
-                                    cliente.criarPedido(cliente.getEndereco(),15);
-
-                                }else {
-                                    excecaoSaldoInsuficiente.exibirEX();
-                                }
-                            } else if (confirmacao == 2) {
-                                System.exit(2);
+                            // Confirm payment
+                            if (cliente.getSaldo() >= cliente.getCarrinho().getValorTotal()) {
+                                paymentStrategy.pay(cliente.getCarrinho().getValorTotal());
+                                cliente.setSaldo(cliente.getSaldo() - cliente.getCarrinho().getValorTotal());
+                                cliente.criarPedido(cliente.getEndereco(), 15); // Criar o pedido
+                                System.out.println("Compra realizada com sucesso!");
+                            } else {
+                                excecaoSaldoInsuficiente.exibirEX(); // Exibir exceção de saldo insuficiente
                             }
-
                         }
-                    }else if (opc == 2) {
-                        System.out.println("Tudo bem!Talvez na próxima :( ");
-                    }else {
-                        System.out.println("Opção inválida");
+                    } else {
+                        System.out.println("Tudo bem! Talvez na próxima.");
                     }
-
                     break;
                 case 6:
                     System.out.println("Saindo...");
                     break;
-
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }

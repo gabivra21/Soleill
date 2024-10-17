@@ -1,0 +1,16 @@
+Nome do Cliente: Pedro
+Quantidade: 1
+Produtos: [Vestuario@439f5b3d]
+Valor Total: 43.099998474121094
+Prazo de Entrega: 15 dias
+Entregue: false
+Endereço de Entrega: minha casa 123
+
+Nome do Cliente: Pedro
+Quantidade: 1
+Produtos: [Vestuario@2ef1e4fa]
+Valor Total: 80.0
+Prazo de Entrega: 15 dias
+Entregue: false
+Endereço de Entrega: minha casa 123
+
