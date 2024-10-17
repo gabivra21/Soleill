@@ -10,7 +10,7 @@ public class GerenciadorCliente  {
     private ArrayList<ClientePremium> listaClientesPremium;
     private ArrayList<Cliente> listaTodosClientes;
 
-    public GerenciadorCliente() throws IOException {
+    private GerenciadorCliente() throws IOException {
     	ClienteAdapter = new FileClienteAdapter("clientes.txt");
         listaClientesComuns = new ArrayList<>();
         listaClientesPremium = new ArrayList<>();
