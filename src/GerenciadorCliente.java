@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GerenciadorCliente  {
+	private FileClienteAdapter ClienteAdapter;
     private ArrayList<ClienteComum> listaClientesComuns;
     private ArrayList<ClientePremium> listaClientesPremium;
     private ArrayList<Cliente> listaTodosClientes;
 
-    public GerenciadorCliente() {
+    public GerenciadorCliente() throws IOException {
+    	ClienteAdapter = new FileClienteAdapter("clientes.txt");
         listaClientesComuns = new ArrayList<>();
         listaClientesPremium = new ArrayList<>();
         listaTodosClientes = new ArrayList<>();
@@ -47,7 +49,7 @@ public class GerenciadorCliente  {
         return listaTodosClientes;
     }
 
-    public void cadastrarCliente() {
+    public void cadastrarCliente() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Nome: ");
@@ -104,43 +106,15 @@ public class GerenciadorCliente  {
     }
 
 
-    public void salvarClientes() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("clientes.txt"))) {
-            for (Cliente cliente : listaTodosClientes) {
-                writer.println(cliente.toFileString());
-            }
-            System.out.println("Clientes salvos com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar clientes: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void salvarClientes() throws IOException {
+        ClienteAdapter.saveClients(listaTodosClientes);
     }
 
-    public void carregarClientes() {
-        File file = new File("clientes.txt");
-        if (!file.exists()) {
-            System.out.println("Nenhum arquivo de clientes encontrado. Um novo arquivo será criado.");
-            return;
-        }
-
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                Cliente cliente = Cliente.fromFileString(line);
-                listaTodosClientes.add(cliente);
-                listaClientesComuns.add((ClienteComum) cliente);
-            }
-            System.out.println("----------------------------------");
-        } catch (FileNotFoundException e) {
-            System.out.println("Erro ao carregar clientes: Arquivo não encontrado.");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar clientes: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void carregarClientes() throws IOException {
+    	this.listaTodosClientes = ClienteAdapter.loadClients();
     }
 
-    public void ativarAssinaturaClienteADM(){
+    public void ativarAssinaturaClienteADM() throws IOException{
         Scanner scannerAD = new Scanner(System.in);
         System.out.print("Email do cliente para ativar assinatura: ");
         String emailAtivacao = scannerAD.nextLine();

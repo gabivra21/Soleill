@@ -1,7 +1,7 @@
 
 
 public class ClientePremium extends Cliente {
-    public ClientePremium(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
+    public ClientePremium(String nome, String email, String celular, String senha, double saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
 

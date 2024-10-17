@@ -1,7 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+    	
         Produto calca = new Vestuario(43.1f, "calça jeans preta", 21);
         Produto camisa = new Vestuario(79.99f, "camisa polo azul", 80);
         Produto regata = new Vestuario(29.99f, "regata curta preta", 21);
@@ -56,6 +58,7 @@ public class Main {
         System.out.println("");
         Menu menu = new Menu();
         GerenciadorCliente gerenciadorCliente = new GerenciadorCliente();
+        gerenciadorCliente.listarClientes();
         GerenciadorProduto gerenciadorProduto = new GerenciadorProduto();
         ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente = new ExcecaoSaldoInsuficiente();
         menu.printMenu(gerenciadorProduto, vestuario, calcados, gerenciadorCliente, excecaoSaldoInsuficiente);

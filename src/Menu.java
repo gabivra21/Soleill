@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Pagamento.*;
@@ -6,7 +7,7 @@ public class Menu {
     public Menu() {
     }
 
-    public void printMenu(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados,  GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) {
+    public void printMenu(GerenciadorProduto gerenciadorProduto, ArrayList<Produto> vestuario, ArrayList<Produto> calcados,  GerenciadorCliente gerenciadorCliente, ExcecaoSaldoInsuficiente excecaoSaldoInsuficiente) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         int opcao;
