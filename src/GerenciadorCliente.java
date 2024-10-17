@@ -69,7 +69,7 @@ public class GerenciadorCliente  {
         String validadeAssinatura = null;
         float saldo = 0.0f;
 
-        Carrinho carrinho = Carrinho.getInstance(new ArrayList<Produto>(), 0, null, 0.0);
+        CarrinhoSingleton carrinho = CarrinhoSingleton.getInstance(new ArrayList<Produto>(), 0, null, 0.0);
 
         ClienteComum novoCliente = new ClienteComum(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtivada, validadeAssinatura);
 

@@ -12,7 +12,7 @@ public abstract class Cliente {
     private boolean assinaturaAtiva;
     protected String validadeAssinatura;
 
-    public Cliente(String nome, String email, String celular, String senha,float saldo,Carrinho carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
+    public Cliente(String nome, String email, String celular, String senha,float saldo,CarrinhoSingleton carrinho, String endereco,boolean assinaturaAtiva,String validadeAssinatura ) {
         this.nome = nome;
         this.email = email;
         this.celular = celular;
@@ -45,7 +45,7 @@ public abstract class Cliente {
         String endereco = parts[5];
         boolean assinaturaAtiva = Boolean.parseBoolean(parts[6]);
         String validadeAssinatura = parts[7];
-        CarrinhoSingleton carrinho = Carrinho.getInstance(new ArrayList<Produto>(), 0, null, 0.0f); // Ajuste conforme necessário
+        CarrinhoSingleton carrinho = CarrinhoSingleton.getInstance(new ArrayList<Produto>(), 0, null, 0.0f);
         if (assinaturaAtiva) {
             return new ClientePremium(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
         } else {
@@ -115,11 +115,11 @@ public abstract class Cliente {
         this.saldo = saldo;
     }
 
-    public Carrinho getCarrinho() {
+    public CarrinhoSingleton getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
+    public void setCarrinho(CarrinhoSingleton carrinho) {
         this.carrinho = carrinho;
     }
 
@@ -148,7 +148,7 @@ public abstract class Cliente {
         this.validadeAssinatura = validadeAssinatura;
     }
 
-    public abstract double comprar(Carrinho carrinho);
+    public abstract double comprar(CarrinhoSingleton carrinho);
 
 
 

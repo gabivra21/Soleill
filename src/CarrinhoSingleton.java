@@ -20,7 +20,7 @@ public class CarrinhoSingleton  {
 
     public static CarrinhoSingleton getInstance(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
         if (instancia == null) {
-            instancia = new Carrinho(itens, qtdItens, cliente, valorTotal);
+            instancia = new CarrinhoSingleton(itens, qtdItens, cliente, valorTotal);
         }
         return instancia;
     }

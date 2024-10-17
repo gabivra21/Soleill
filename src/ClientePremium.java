@@ -1,12 +1,12 @@
 
 
 public class ClientePremium extends Cliente {
-    public ClientePremium(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
+    public ClientePremium(String nome, String email, String celular, String senha, float saldo, CarrinhoSingleton carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
 
     @Override
-    public  double comprar(Carrinho carrinho) {
+    public  double comprar(CarrinhoSingleton carrinho) {
         System.out.println("Como Cliente Premium, você possui Frete Grátis!!!");
         System.out.println("O total é :"+carrinho.getValorTotal());
         return carrinho.calcularValorTotal();

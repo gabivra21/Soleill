@@ -8,13 +8,13 @@ public class ClienteComum extends Cliente  {
 
     }
 
-    public ClienteComum(String nome, String email, String celular, String senha, float saldo, Carrinho carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
+    public ClienteComum(String nome, String email, String celular, String senha, float saldo, CarrinhoSingleton carrinho, String endereco, boolean assinaturaAtiva, String validadeAssinatura) {
         super(nome, email, celular, senha, saldo, carrinho, endereco, assinaturaAtiva, validadeAssinatura);
     }
 
 
     @Override
-    public  double comprar(Carrinho carrinho) {
+    public  double comprar(CarrinhoSingleton carrinho) {
         if (this.carrinho == null || this.carrinho.getItens().isEmpty()) {
             System.out.println("Carrinho vazio");
 
