@@ -1,24 +1,24 @@
 
 import java.util.ArrayList;
 
-public class Carrinho  {
+public class CarrinhoSingleton  {
     private ArrayList<Produto> itens;
     private int qtdItens;
-    private static Carrinho instancia;
+    private static CarrinhoSingleton instancia;
 
     private Cliente cliente;
     private double valorTotal;
 
-    private Carrinho(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
+    private CarrinhoSingleton(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
         this.itens = itens != null ? itens : new ArrayList<>();
         this.qtdItens = qtdItens;
         this.cliente = cliente;
         this.valorTotal = valorTotal;
     }
 
-    private Carrinho() {}
+    private CarrinhoSingleton() {}
 
-    public static Carrinho getInstance(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
+    public static CarrinhoSingleton getInstance(ArrayList<Produto> itens, int qtdItens, Cliente cliente, double valorTotal) {
         if (instancia == null) {
             instancia = new Carrinho(itens, qtdItens, cliente, valorTotal);
         }
